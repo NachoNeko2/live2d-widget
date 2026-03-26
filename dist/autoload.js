@@ -86,3 +86,43 @@ console.log(`\n%cLive2D%cWidget%c\n`, 'padding: 8px; background: #cd3e45; font-w
                 ﾄ-,/  |___./
                 'ｰ'    !_,.:
 */
+<!-- Live2D 自适应样式 -->
+<style>
+/* 电脑端默认大小 */
+#live2d-widget {
+  width: 280px !important;
+  height: 250px !important;
+  z-index: 9999;
+}
+
+/* 手机端自适应大小（屏幕≤768px生效） */
+@media (max-width: 768px) {
+  #live2d-widget {
+    width: 160px !important;
+    height: 140px !important;
+  }
+  /* 手机端左下角留出安全距离，避免被底部按钮遮挡 */
+  #live2d-widget {
+    left: 10px !important;
+    bottom: 10px !important;
+  }
+}
+
+/* 超小屏（如iPhone 竖屏）再缩小 */
+@media (max-width: 420px) {
+  #live2d-widget {
+    width: 130px !important;
+    height: 120px !important;
+  }
+}
+</style>
+
+<!-- 自适应自动刷新 -->
+<script>
+// 窗口大小改变时自动重绘 Live2D
+window.addEventListener('resize', () => {
+  if (window.live2d) {
+    window.live2d.update();
+  }
+});
+</script>
